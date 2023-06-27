@@ -1,7 +1,7 @@
 function InitialPage() {
   return (
     <div>
-      <div>Vacilo</div>
+      <h2>List of pokemon</h2>
     </div>
   );
 }
