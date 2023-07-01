@@ -20,51 +20,48 @@ function PokemonPage() {
       );
   }, []);
 
-  if (pokemon && evolutions) {
-    const capitalized = pokemon.name[0].toUpperCase() + pokemon.name.substr(1);
-
-    console.log(evolutions);
-    return (
-      <div>
-        <div>
-          <h2>
-            {capitalized} {`#${pokemon.order}`}
-          </h2>
-          <ul>
-            {pokemon.types.map((tipo: any, index: number) => {
-              return <li key={index}>{tipo.type.name}</li>;
-            })}
-          </ul>
-          <img src={pokemon.sprites.front_default} alt={pokemon.name} />
-        </div>
-
-        <div>
-          <h3>stats:</h3>
-          <ul>
-            {pokemon.stats.map((status: any, index: number) => {
-              return (
-                <li key={index}>
-                  {status.stat.name}: <span>{status.base_stat}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-
-        <div>
-          <h3>evolves for:
-            <img src="" alt="" />
-          </h3>
-        </div>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <p>carregando...</p>
-      </div>
-    );
+  if (!pokemon) {
+    return <p>Loading...</p>;
   }
+
+  const capitalized = pokemon.name[0].toUpperCase() + pokemon.name.substr(1);
+
+  console.log(evolutions);
+  return (
+    <div>
+      <div>
+        <h2>
+          {capitalized} {`#${pokemon.order}`}
+        </h2>
+        <ul>
+          {pokemon.types.map((tipo: any, index: number) => {
+            return <li key={index}>{tipo.type.name}</li>;
+          })}
+        </ul>
+        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+      </div>
+
+      <div>
+        <h3>stats:</h3>
+        <ul>
+          {pokemon.stats.map((status: any, index: number) => {
+            return (
+              <li key={index}>
+                {status.stat.name}: <span>{status.base_stat}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div>
+        <h3>
+          evolves for:
+          <img src="" alt="" />
+        </h3>
+      </div>
+    </div>
+  );
 }
 
 export default PokemonPage;

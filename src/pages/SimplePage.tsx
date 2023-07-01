@@ -16,32 +16,24 @@ function SimplePage() {
       .catch((err) => console.error(err));
   }, []);
 
-  if (pokemons) {
-    const arrayOfPokemons: Pokemon[] = pokemons.results;
+  const arrayOfPokemons: Pokemon[] = pokemons.results;
 
-    return (
-      <div>
-        <h2>List of pokemon</h2>
+  return (
+    <div>
+      <h2>List of pokemon</h2>
 
-        <ul>
-          {arrayOfPokemons?.map((pokemon: Pokemon, index: number) => {
-            return (
-              <li key={index}>
-                <p>{pokemon.name}</p>
-                <p>{pokemon.url}</p>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <p>Carregando...</p>
-      </div>
-    );
-  }
+      <ul>
+        {arrayOfPokemons?.map((pokemon: Pokemon, index: number) => {
+          return (
+            <li key={index}>
+              <p>{pokemon.name}</p>
+              <p>{pokemon.url}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
 }
 
 export default SimplePage;
