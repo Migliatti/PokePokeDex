@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import InitialPage from "./pages/InitialPage";
+import SimplePAge from "./pages/SimplePage";
 import Header from "./Components/Header";
 import PokemonPage from "./pages/PokemonPage";
 
@@ -8,7 +8,7 @@ function Routers() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<InitialPage />} />
+        <Route path="/" element={<SimplePAge />} />
         <Route path="/2" element={<PokemonPage />} />
       </Routes>
     </BrowserRouter>
