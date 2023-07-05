@@ -9,7 +9,7 @@ function Routers() {
       <Header />
       <Routes>
         <Route path="/" element={<SimplePAge />} />
-        <Route path="/2" element={<PokemonPage />} />
+        <Route path="/pokemon/:id" element={<PokemonPage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,13 +1,15 @@
+import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { useState, useEffect } from "react";
 
 function PokemonPage() {
   const [pokemon, setPokemon] = useState<any>();
   const [evolutions, setEvolutions] = useState<any>();
+  const { id } = useParams();
 
   useEffect(() => {
     api
-      .get("pokemon/92")
+      .get("pokemon/" + id)
       .then((response) => setPokemon(response.data))
       .catch((err) => {
         console.error("ocorreu um erro ao requisitar a api" + err);
@@ -18,7 +20,7 @@ function PokemonPage() {
       .catch((err) =>
         console.error("ocorreu um erro ao requisitar a api" + err)
       );
-  }, []);
+  }, [id]);
 
   if (!pokemon) {
     return <p>Loading...</p>;

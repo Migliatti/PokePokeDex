@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import Card from "../Components/Card/Index";
 
 interface Pokemon {
   name: string;
@@ -11,7 +12,7 @@ function SimplePage() {
 
   useEffect(() => {
     api
-      .get("pokemon")
+      .get("pokemon?limit=20&offset=0")
       .then((response) => setPokemons(response.data))
       .catch((err) => console.error(err));
   }, []);
@@ -24,12 +25,7 @@ function SimplePage() {
 
       <ul>
         {arrayOfPokemons?.map((pokemon: Pokemon, index: number) => {
-          return (
-            <li key={index}>
-              <p>{pokemon.name}</p>
-              <p>{pokemon.url}</p>
-            </li>
-          );
+          return <Card key={index} name={pokemon.name} url={pokemon.url} />;
         })}
       </ul>
     </div>
