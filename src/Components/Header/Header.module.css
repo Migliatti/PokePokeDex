@@ -1,0 +1,12 @@
+.header {
+  padding: 2rem;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.name {
+  font-size: 28px;
+  color: black;
+}

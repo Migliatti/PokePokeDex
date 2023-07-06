@@ -1,0 +1,17 @@
+.simple__page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.list__pokemon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 20px;
+}

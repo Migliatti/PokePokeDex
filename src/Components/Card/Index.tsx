@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import api from "../../services/api";
+import classNames from "classnames";
+import style from "./Card.module.css";
 
 interface Props {
   name: string;
@@ -34,9 +36,30 @@ function Card({ url, name }: Props) {
   }
 
   return (
-    <div onClick={handleCardClick}>
-      <h3>{capitalized}</h3>
-      <img src={pokemon.sprites.front_default} alt={name} />
+    <div onClick={handleCardClick} className={style.card}>
+      <h3 className={style.name}>{capitalized}</h3>
+      <img
+        className={style.img}
+        src={pokemon.sprites.front_default}
+        alt={name}
+      />
+      <ul className={style.list}>
+        {pokemon.types.map((currentType: any, index: number) => {
+          const typeCapitalized =
+            currentType.type.name[0].toUpperCase() +
+            currentType.type.name.substr(1);
+          return (
+            <li
+              className={classNames(style.type, {
+                [style[`type__${currentType.type.name}`]]: true,
+              })}
+              key={index}
+            >
+              {typeCapitalized}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }

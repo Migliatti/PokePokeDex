@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import api from "../services/api";
-import Card from "../Components/Card/Index";
+import api from "../../services/api";
+import Card from "../../Components/Card";
 import { useNavigate, useParams } from "react-router-dom";
+import style from "./SimplePage.module.css";
 
 interface Pokemon {
   name: string;
@@ -63,27 +64,35 @@ function SimplePage() {
   };
 
   return (
-    <div>
-      <h2>List of pokemon</h2>
+    <div className={style.simple__page}>
+      <h2 className={style.title}>List of pokemon</h2>
 
       {loading ? (
-        <p>Loading...</p> // Renderiza uma mensagem de carregamento enquanto loading for true
+        <p className={style.loading}>Loading...</p> // Renderiza uma mensagem de carregamento enquanto loading for true
       ) : (
-        <ul>
+        <ul className={style.list__pokemon}>
           {pokemons.map((pokemon: Pokemon, index: number) => {
             return <Card key={index} name={pokemon.name} url={pokemon.url} />;
           })}
         </ul>
       )}
 
-      <div>
-        <p>
+      <div className={style.page__nav}>
+        <p className={style.current__page}>
           Page {currentPage} of {totalPages}
         </p>
-        <button disabled={currentPage === 1} onClick={handlePreviousPage}>
+        <button
+          className={style.button__page}
+          disabled={currentPage === 1}
+          onClick={handlePreviousPage}
+        >
           Previous Page
         </button>
-        <button disabled={currentPage === totalPages} onClick={handleNextPage}>
+        <button
+          className={style.button__page}
+          disabled={currentPage === totalPages}
+          onClick={handleNextPage}
+        >
           Next Page
         </button>
       </div>

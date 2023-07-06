@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 import { useState, useEffect } from "react";
 
 function PokemonPage() {
@@ -27,8 +27,6 @@ function PokemonPage() {
   }
 
   const capitalized = pokemon.name[0].toUpperCase() + pokemon.name.substr(1);
-
-  console.log(evolutions);
   return (
     <div>
       <div>
