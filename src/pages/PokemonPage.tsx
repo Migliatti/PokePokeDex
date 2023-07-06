@@ -55,13 +55,6 @@ function PokemonPage() {
           })}
         </ul>
       </div>
-
-      <div>
-        <h3>
-          evolves for:
-          <img src="" alt="" />
-        </h3>
-      </div>
     </div>
   );
 }
