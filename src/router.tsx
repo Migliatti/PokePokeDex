@@ -8,7 +8,7 @@ function Routers() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<SimplePAge />} />
+        <Route path="/page?/:page?" element={<SimplePAge />} />
         <Route path="/pokemon/:id" element={<PokemonPage />} />
       </Routes>
     </BrowserRouter>

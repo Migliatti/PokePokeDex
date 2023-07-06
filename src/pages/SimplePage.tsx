@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
 import Card from "../Components/Card/Index";
+import { useParams } from "react-router-dom";
 
 interface Pokemon {
   name: string;
@@ -9,10 +10,11 @@ interface Pokemon {
 
 function SimplePage() {
   const [pokemons, setPokemons] = useState<any[any]>([]);
+  const { page } = useParams();
 
   useEffect(() => {
     api
-      .get("pokemon?limit=20&offset=0")
+      .get(`pokemon?limit=20&offset=${Number(page) *10}`)
       .then((response) => setPokemons(response.data))
       .catch((err) => console.error(err));
   }, []);
