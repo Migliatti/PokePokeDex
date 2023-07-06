@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   name: string;
@@ -8,6 +8,7 @@ interface Props {
 }
 
 function Card({ url, name }: Props) {
+  const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<any>();
   const cut = url.split("/");
   cut.splice(0, 5);
@@ -22,15 +23,21 @@ function Card({ url, name }: Props) {
 
   const capitalized = name[0].toUpperCase() + name.substr(1);
 
+  const handleCardClick = () => {
+    if (pokemon) {
+      navigate(`/pokemon/${pokemon.id}`);
+    }
+  };
+
   if (!pokemon) {
     return <p>Loading...</p>;
   }
 
   return (
-    <Link to={`pokemon/${pokemon.id}`}>
+    <div onClick={handleCardClick}>
       <h3>{capitalized}</h3>
       <img src={pokemon.sprites.front_default} alt={name} />
-    </Link>
+    </div>
   );
 }
 
