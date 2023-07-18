@@ -63,6 +63,12 @@ function SimplePage() {
     setCurrentPage(nextPage);
   };
 
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      navigate("/not-found");
+    }
+  }, [currentPage, totalPages, navigate]);
+
   return (
     <div className={style.simple__page}>
       <h2 className={style.title}>List of pokemon</h2>

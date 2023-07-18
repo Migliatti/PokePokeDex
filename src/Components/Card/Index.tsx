@@ -37,7 +37,9 @@ function Card({ url, name }: Props) {
 
   return (
     <div onClick={handleCardClick} className={style.card}>
-      <h3 className={style.name}>{capitalized}</h3>
+      <h3 className={style.name}>
+        {capitalized} {`#${pokemon.order}`}
+      </h3>
       <img
         className={style.img}
         src={pokemon.sprites.front_default}
