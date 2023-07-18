@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
 import { useState, useEffect } from "react";
 import classNames from "classnames";
@@ -133,22 +133,23 @@ function PokemonPage() {
             <p>Height: {pokemon.height}</p>
             <p>Weight: {pokemon.weight}</p>
           </div>
+
           {/* retirar dps */}
           <br />
-          <div></div>
-        </div>
 
-        <div className={style.abilities}>
-          <h3>Abilities</h3>
-          {pokemon.abilities.map((ability: any) => {
-            const name =
-              ability.ability.name[0].toUpperCase() +
-              ability.ability.name.substr(1);
-            return <div>{name}</div>;
-          })}
+          <div className={style.abilities}>
+            <h3>Abilities</h3>
+            {pokemon.abilities.map((ability: any) => {
+              const name =
+                ability.ability.name[0].toUpperCase() +
+                ability.ability.name.substr(1);
+              return <div>{name}</div>;
+            })}
+          </div>
+
+          {/* retirar dps */}
+          <br />
         </div>
-        {/* retirar dps */}
-        <br />
       </div>
 
       <div className={style.statistics}>
