@@ -3,20 +3,24 @@ import api from "../../services/api";
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import style from "./PokemonPage.module.css";
+import Abilities from "./Abilities";
+
+function capitalizeName(name: string) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 function PokemonPage() {
   const [pokemon, setPokemon] = useState<any>();
   const [nextPokemon, setNextPokemon] = useState<any>();
   const [prevPokemon, setPrevPokemon] = useState<any>();
-  const [evolutions, setEvolutions] = useState<any>();
-  const { id } = useParams();
+  const { idPage } = useParams();
   const navigate = useNavigate();
-  const next = Number(id) + 1;
-  const prev = Number(id) - 1;
+  const next = Number(idPage) + 1;
+  const prev = Number(idPage) - 1;
 
   useEffect(() => {
     api
-      .get("pokemon/" + id)
+      .get("pokemon/" + idPage)
       .then((response) => setPokemon(response.data))
       .catch((err) => {
         console.error("ocorreu um erro ao requisitar a api" + err);
@@ -33,31 +37,18 @@ function PokemonPage() {
       .catch((err) => {
         console.error("ocorreu um erro ao requisitar a api" + err);
       });
-    api
-      .get("evolution-chain/")
-      .then((response) => setEvolutions(response.data))
-      .catch((err) =>
-        console.error("ocorreu um erro ao requisitar a api" + err)
-      );
-  }, [id, next, prev]);
+  }, [idPage, next, prev]);
 
   if (!pokemon && !nextPokemon && !prevPokemon) {
     return <p>Loading...</p>;
   }
 
-  console.log(pokemon);
+  const { name, id, types, sprites, height, weight, game_indices, stats } =
+    pokemon;
 
-  const capitalized = pokemon.name[0].toUpperCase() + pokemon.name.substr(1);
-  let nextCapitalized = "";
-  if (nextPokemon && nextPokemon.name) {
-    nextCapitalized =
-      nextPokemon.name[0].toUpperCase() + nextPokemon.name.substr(1);
-  }
-  let prevCapitalized = "";
-  if (prevPokemon && prevPokemon.name) {
-    prevCapitalized =
-      prevPokemon.name[0].toUpperCase() + prevPokemon.name.substr(1);
-  }
+  const nameCapitalized = capitalizeName(pokemon.name);
+  const nextCapitalized = nextPokemon ? capitalizeName(nextPokemon.name) : "";
+  const prevCapitalized = prevPokemon ? capitalizeName(prevPokemon.name) : "";
 
   const handleNextClick = () => {
     if (nextPokemon) {
@@ -71,13 +62,39 @@ function PokemonPage() {
     }
   };
 
+  const typeList = types.map((currentType: any, index: number) => {
+    const typeCapitalized = capitalizeName(currentType.type.name);
+    return (
+      <li
+        className={classNames(
+          style.type,
+          style[`type__${currentType.type.name}`]
+        )}
+        key={index}
+      >
+        {typeCapitalized}
+      </li>
+    );
+  });
+
+  const statsList = stats.map((stat: any) => ({
+    name: capitalizeName(stat.stat.name),
+    base_stat: stat.base_stat,
+  }));
+
+  const movesList = pokemon.moves.map((move: any) =>
+    capitalizeName(move.move.name)
+  );
+
+  console.log(movesList)
+
   return (
     <div className={style.pokemon__page}>
       <div className={style.pokemon__nav}>
         <div className={style.nav__prev}>
           {prevPokemon && Number(id) !== 1 ? (
             <p className={style.nav__button} onClick={handlePrevClick}>
-              {prevCapitalized}
+              {prevCapitalized} {`#${prevPokemon.id}`}
             </p>
           ) : (
             <div></div>
@@ -86,7 +103,7 @@ function PokemonPage() {
         <div className={style.nav__next}>
           {nextPokemon ? (
             <p className={style.nav__button} onClick={handleNextClick}>
-              {nextCapitalized}
+              {nextCapitalized} {`#${nextPokemon.id}`}
             </p>
           ) : (
             <div></div>
@@ -98,28 +115,24 @@ function PokemonPage() {
 
       <div className={style.info}>
         <h2 className={classNames(style.nome)}>
-          {capitalized}
+          {nameCapitalized}
           <span
             className={classNames(style.id__pokemon)}
           >{`#${pokemon.id}`}</span>
         </h2>
         <ul className={style.types}>
-          {pokemon.types.map((currentType: any, index: number) => {
-            const typeCapitalized =
-              currentType.type.name[0].toUpperCase() +
-              currentType.type.name.substr(1);
-            return (
-              <li
-                className={classNames(
-                  style.type,
-                  style[`type__${currentType.type.name}`]
-                )}
-                key={index}
-              >
-                {typeCapitalized}
-              </li>
-            );
-          })}
+          {/* Utilizando a variável typeList aqui */}
+          {typeList.map((type: string, index: number) => (
+            <li
+              className={classNames(
+                style.type,
+                style[`type__${type}`] // Certifique-se que as classes existam em seu CSS
+              )}
+              key={index}
+            >
+              {type}
+            </li>
+          ))}
         </ul>
         <img
           className={style.pokemon__image}
@@ -137,13 +150,18 @@ function PokemonPage() {
           {/* retirar dps */}
           <br />
 
-          <div className={style.abilities}>
-            <h3>Abilities</h3>
-            {pokemon.abilities.map((ability: any) => {
+          <Abilities abilities={pokemon.abilities} />
+
+          {/* retirar dps */}
+          <br />
+
+          <div className={style.games}>
+            <h3>Games</h3>
+            {pokemon.game_indices.map((game: any, index: number) => {
               const name =
-                ability.ability.name[0].toUpperCase() +
-                ability.ability.name.substr(1);
-              return <div>{name}</div>;
+                game.version.name[0].toUpperCase() +
+                game.version.name.substr(1);
+              return <div key={index}>{name}</div>;
             })}
           </div>
 
@@ -153,20 +171,28 @@ function PokemonPage() {
       </div>
 
       <div className={style.statistics}>
-        <div className={style.abilities}></div>
-
         <div className={style.stats}>
           <h3 className={style.stats__title}>Stats:</h3>
           <ul className={style.stats__list}>
-            {pokemon.stats.map((status: any, index: number) => {
-              return (
+            {/* Utilizando a variável statsList aqui */}
+            {statsList.map(
+              (stat: { name: string; base_stat: number }, index: number) => (
                 <li className={style.stats__item} key={index}>
-                  {status.stat.name}: <span>{status.base_stat}</span>
+                  {stat.name}: <span>{stat.base_stat}</span>
                 </li>
-              );
-            })}
+              )
+            )}
           </ul>
         </div>
+      </div>
+      <div className={style.moves}>
+        <h3>Moves</h3>
+        <ul>
+          {/* Utilizando a variável movesList aqui */}
+          {movesList.map((move: string, index: number) => (
+            <li key={index}>{move}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );

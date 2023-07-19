@@ -21,81 +21,102 @@
   list-style: none;
   padding: 0;
   margin: 10px 0;
+  gap: 16px;
 }
 
 .type {
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 14px;
   font-weight: bold;
-  color: #fff;
-  margin-right: 5px;
-}
-
-.type__grass {
-  background-color: #78c850;
-}
-
-.type__fire {
-  background-color: #f08030;
-}
-
-.type__water {
-  background-color: #6890f0;
-}
-
-.type__electric {
-  background-color: #f8d030;
-}
-
-.type__bug {
-  background-color: #a8b820;
+  padding: 0.5em 0.7em;
+  border-radius: 5px;
+  color: white;
 }
 
 .type__normal {
   background-color: #a8a878;
+  box-shadow: 3px 3px 8px #a8a878f1;
 }
 
-.type__poison {
-  background-color: #a040a0;
-}
-
-.type__ground {
-  background-color: #e0c068;
-}
-
-.type__fairy {
-  background-color: #ee99ac;
+.type__fire {
+  background-color: #f08030;
+  box-shadow: 3px 3px 8px #f08030f1;
 }
 
 .type__fighting {
   background-color: #c03028;
+  box-shadow: 3px 3px 8px #c03028f1;
 }
 
-.type__psychic {
-  background-color: #f85888;
-}
-
-.type__rock {
-  background-color: #b8a038;
-}
-
-.type__ghost {
-  background-color: #705898;
-}
-
-.type__ice {
-  background-color: #98d8d8;
-}
-
-.type__dragon {
-  background-color: #7038f8;
-}
-
-.type__steel {
-  background-color: #b8b8d0;
+.type__water {
+  background-color: #6890f0;
+  box-shadow: 3px 3px 8px #6890f0f1;
 }
 
 .type__flying {
   background-color: #a890f0;
+  box-shadow: 3px 3px 8px #a890f0f1;
+}
+
+.type__grass {
+  background-color: #78c850;
+  box-shadow: 3px 3px 8px #78c850f1;
+}
+
+.type__poison {
+  background-color: #a040a0;
+  box-shadow: 3px 3px 8px #a040a0f1;
+}
+
+.type__electric {
+  background-color: #f8d030;
+  box-shadow: 3px 3px 8px #f8d030f1;
+}
+
+.type__ground {
+  background-color: #e0c068;
+  box-shadow: 3px 3px 8px #e0c068f1;
+}
+
+.type__psychic {
+  background-color: #f85888;
+  box-shadow: 3px 3px 8px #f85888f1;
+}
+
+.type__rock {
+  background-color: #b8a038;
+  box-shadow: 3px 3px 8px #b8a038f1;
+}
+
+.type__ice {
+  background-color: #98d8d8;
+  box-shadow: 3px 3px 8px #98d8d8f1;
+}
+
+.type__bug {
+  background-color: #a8b820;
+  box-shadow: 3px 3px 8px #a8b820f1;
+}
+
+.type__dragon {
+  background-color: #7038f8;
+  box-shadow: 3px 3px 8px #7038f8f1;
+}
+
+.type__ghost {
+  background-color: #705898;
+  box-shadow: 3px 3px 8px #705898f1;
+}
+
+.type__dark {
+  background-color: #705848;
+  box-shadow: 3px 3px 8px #705848f1;
+}
+
+.type__steel {
+  background-color: #b8b8d0;
+  box-shadow: 3px 3px 8px #b8b8d0f1;
+}
+
+.type__fairy {
+  background-color: #ee99ac;
+  box-shadow: 3px 3px 8px #ee99acf1;
 }

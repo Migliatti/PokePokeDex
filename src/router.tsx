@@ -13,7 +13,7 @@ function Routers() {
         <Route path="/" element={<SimplePage />}>
           <Route path="page/:page?" element={<SimplePage />} />
         </Route>
-        <Route path="/pokemon/:id" element={<PokemonPage />} />
+        <Route path="/pokemon/:idPage" element={<PokemonPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
