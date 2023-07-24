@@ -1,48 +1,42 @@
-import { useNavigate, useParams } from "react-router-dom";
-import api from "../../services/api";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../services/api";
 import classNames from "classnames";
-import style from "./PokemonPage.module.css";
 import Abilities from "./Abilities";
 import MoveList from "./MoveList";
 import Games from "./Games";
 import TypesPokemon from "../../Components/TypesPokemon";
+import StatsPokemon from "./StatsPokemon";
+import Metrics from "./Metrics";
+import NavPokemon from "./NavPokemon";
+import style from "./PokemonPage.module.css";
+import SpeciesStats from "./SpeciesStats";
 
 export function capitalizeName(name: string) {
+  if (typeof name !== "string" || name.length === 0) {
+    return name; // Retorna o valor original se não for uma string válida
+  }
   return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
 function PokemonPage() {
-  const [pokemon, setPokemon] = useState<any>();
-  const [nextPokemon, setNextPokemon] = useState<any>();
-  const [prevPokemon, setPrevPokemon] = useState<any>();
+  const [pokemon, setPokemon] = useState<any>({});
   const { idPage } = useParams();
-  const navigate = useNavigate();
-  const next = Number(idPage) + 1;
-  const prev = Number(idPage) - 1;
 
   useEffect(() => {
-    api
-      .get("pokemon/" + idPage)
-      .then((response) => setPokemon(response.data))
-      .catch((err) => {
-        console.error("ocorreu um erro ao requisitar a api" + err);
-      });
-    api
-      .get("pokemon/" + next)
-      .then((response) => setNextPokemon(response.data))
-      .catch((err) => {
-        console.error("ocorreu um erro ao requisitar a api" + err);
-      });
-    api
-      .get("pokemon/" + prev)
-      .then((response) => setPrevPokemon(response.data))
-      .catch((err) => {
-        console.error("ocorreu um erro ao requisitar a api" + err);
-      });
-  }, [idPage, next, prev]);
+    const fetchData = async () => {
+      try {
+        const response = await api.get("pokemon/" + idPage);
+        setPokemon(response.data);
+      } catch (error) {
+        console.error("ocorreu um erro ao requisitar a api", error);
+      }
+    };
 
-  if (!pokemon && !nextPokemon && !prevPokemon) {
+    fetchData();
+  }, [idPage]);
+
+  if (!pokemon) {
     return <p>Loading...</p>;
   }
 
@@ -56,97 +50,50 @@ function PokemonPage() {
     game_indices,
     stats,
     abilities,
+    moves: moveList,
+    species,
+    base_experience,
   } = pokemon;
 
   const nameCapitalized = capitalizeName(name);
-  const nextCapitalized = nextPokemon ? capitalizeName(nextPokemon.name) : "";
-  const prevCapitalized = prevPokemon ? capitalizeName(prevPokemon.name) : "";
 
-  const handleNextClick = () => {
-    if (nextPokemon) {
-      navigate(`/pokemon/${nextPokemon.id}`);
-    }
-  };
-
-  const handlePrevClick = () => {
-    if (prevPokemon) {
-      navigate(`/pokemon/${prevPokemon.id}`);
-    }
-  };
-
-  const statsList = stats.map((stat: any) => ({
+  const statsList = stats?.map((stat: any) => ({
     name: capitalizeName(stat.stat.name),
     base_stat: stat.base_stat,
   }));
 
-  const moveList = pokemon.moves;
-
   return (
-    <div className={style.pokemon__page}>
-      <div className={style.pokemon__nav}>
-        <div className={style.nav__prev}>
-          {prevPokemon && Number(id) !== 1 ? (
-            <p className={style.nav__button} onClick={handlePrevClick}>
-              {prevCapitalized} {`#${prevPokemon.id}`}
-            </p>
-          ) : (
-            <div></div>
-          )}
-        </div>
-        <div className={style.nav__next}>
-          {nextPokemon ? (
-            <p className={style.nav__button} onClick={handleNextClick}>
-              {nextCapitalized} {`#${nextPokemon.id}`}
-            </p>
-          ) : (
-            <div></div>
-          )}
-        </div>
-      </div>
+    <section className={style.pokemon__page}>
+      <NavPokemon id={idPage} />
 
       <div className={style.info}>
-        <h2 className={classNames(style.nome)}>
-          {nameCapitalized}
-          <span
-            className={classNames(style.id__pokemon)}
-          >{`#${pokemon.id}`}</span>
-        </h2>
-        <TypesPokemon types={types} />
-        <img
-          className={style.pokemon__image}
-          src={sprites.front_default}
-          alt={name}
-        />
+        <div className={style.name__image}>
+          <h2 className={classNames(style.nome)}>
+            <span className={classNames(style.id__pokemon)}>{`#${id}`}</span>
+            {nameCapitalized}
+          </h2>
+          <TypesPokemon types={types} />
+          <img
+            className={style.pokemon__image}
+            src={sprites?.front_default}
+            alt={name}
+          />
+        </div>
 
         <div className={style.data}>
-          <div className={style.metrics}>
-            <h3>Metrics</h3>
-            <p>Height: {height}</p>
-            <p>Weight: {weight}</p>
-          </div>
-
-          <Abilities abilities={abilities} />
-          <Games game_indices={game_indices} />
+          {height && weight && <Metrics data={{ height, weight }} />}
+          {abilities && <Abilities abilities={abilities} />}
+          {statsList && <StatsPokemon stats={statsList} />}
         </div>
-
-        <div className={style.statistics}>
-          <div className={style.stats}>
-            <h3 className={style.stats__title}>Stats:</h3>
-            <ul className={style.stats__list}>
-              {statsList.map(
-                (stat: { name: string; base_stat: number }, index: number) => (
-                  <li className={style.stats__item} key={index}>
-                    {stat.name}: <span>{stat.base_stat}</span>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
-
-        <MoveList moves={moveList} />
       </div>
-    </div>
+
+      {species && (
+        <SpeciesStats species={species.url} base_experience={base_experience} />
+      )}
+
+      {moveList && <MoveList moves={moveList} />}
+      {game_indices && <Games game_indices={game_indices} />}
+    </section>
   );
 }
 

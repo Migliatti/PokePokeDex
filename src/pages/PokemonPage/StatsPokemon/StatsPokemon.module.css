@@ -1,0 +1,29 @@
+.stats__title {
+  font-size: 20px;
+  padding-bottom: 4px;
+}
+
+.stats__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 8px;
+}
+
+.stats__item {
+  border-top: 1px solid #afafaf;
+  padding-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  color: #5f5f5f;
+}
+
+.stats__item:first-child {
+  border-top: none;
+  padding: none;
+}
+
+.stats__base {
+  color: black;
+}

@@ -5,13 +5,38 @@
   border-radius: 10px;
 }
 
+.info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #000000;
+}
+
+.name__image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .nome {
   font-size: 24px;
-  margin-bottom: 10px;
 }
 
 .id__pokemon {
-  margin-left: 8px;
+  text-align: center;
+  margin-right: 8px;
   font-size: 24px;
   color: #777777;
+}
+
+.pokemon__image {
+  height: 240px;
+  width: 240px;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }

@@ -1,0 +1,32 @@
+.title {
+  padding-bottom: 4px;
+  font-size: 20px;
+}
+
+.metrics {
+  padding-bottom: 4px;
+  border-bottom: 1px solid #5f5f5f;
+}
+
+.data__list {
+  margin: 0 8px;
+  gap: 8px;
+  display: flex;
+}
+
+.list__item {
+  display: flex;
+  gap: 8px;
+}
+
+.list__item:not(:last-child)::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 100%;
+  background-color: #afafaf;
+}
+
+.item__name {
+  color: #5f5f5f;
+}

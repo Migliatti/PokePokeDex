@@ -7,22 +7,18 @@ import { capitalizeName } from "../../pages/PokemonPage";
 
 interface Props {
   name: string;
-  url: string;
 }
 
-function Card({ url, name }: Props) {
+function Card({ name }: Props) {
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<any>();
-  const cut = url.split("/");
-  cut.splice(0, 5);
-  const tg = cut.join("/");
 
   useEffect(() => {
     api
-      .get(`${tg}`)
+      .get(`pokemon/${name}`)
       .then((response) => setPokemon(response.data))
       .catch((err) => console.error(err));
-  }, [tg]);
+  }, [name]);
 
   const capitalized = capitalizeName(name);
 

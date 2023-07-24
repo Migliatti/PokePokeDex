@@ -42,12 +42,12 @@ function SimplePage() {
       .catch((err) => console.error(err))
       .finally(() => {
         if (isMounted) {
-          setLoading(false); // Define loading como false após a chamada à API ser concluída
+          setLoading(false);
         }
       });
 
     return () => {
-      isMounted = false; // Define isMounted como false quando o componente é desmontado
+      isMounted = false;
     };
   }, [currentPage]);
 
@@ -74,11 +74,11 @@ function SimplePage() {
       <h2 className={style.title}>List of pokemon</h2>
 
       {loading ? (
-        <p className={style.loading}>Loading...</p> // Renderiza uma mensagem de carregamento enquanto loading for true
+        <p className={style.loading}>Loading...</p>
       ) : (
         <ul className={style.list__pokemon}>
           {pokemons.map((pokemon: Pokemon, index: number) => {
-            return <Card key={index} name={pokemon.name} url={pokemon.url} />;
+            return <Card key={index} name={pokemon.name} />;
           })}
         </ul>
       )}
