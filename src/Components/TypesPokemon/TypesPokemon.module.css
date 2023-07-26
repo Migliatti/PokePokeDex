@@ -10,7 +10,7 @@
   font-weight: bold;
   padding: 0.5em 0.7em;
   border-radius: 5px;
-  color: white;
+  color: var(--q-color);
 }
 
 .type__normal {

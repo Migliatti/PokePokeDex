@@ -1,4 +1,4 @@
-import { capitalizeName } from "..";
+import { capitalizeName } from "pages/PokemonPage";
 import style from "./Abilities.module.css";
 
 function Abilities({ abilities }: any) {

@@ -1,6 +1,7 @@
 .stats__title {
   font-size: 20px;
   padding-bottom: 4px;
+  color: var(--t-color);
 }
 
 .stats__list {
@@ -11,12 +12,11 @@
 }
 
 .stats__item {
-  border-top: 1px solid #afafaf;
+  border-top: 1px solid var(--e-color);
   padding-top: 4px;
   display: flex;
   justify-content: space-between;
-  gap: 4px;
-  color: #5f5f5f;
+  color: var(--r-color);
 }
 
 .stats__item:first-child {
@@ -25,5 +25,5 @@
 }
 
 .stats__base {
-  color: black;
+  color: var(--t-color);
 }

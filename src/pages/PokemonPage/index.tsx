@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../services/api";
 import classNames from "classnames";
-import Abilities from "./Abilities";
-import MoveList from "./MoveList";
-import Games from "./Games";
+import Abilities from "../../Components/Abilities";
 import TypesPokemon from "../../Components/TypesPokemon";
-import StatsPokemon from "./StatsPokemon";
-import Metrics from "./Metrics";
-import NavPokemon from "./NavPokemon";
-import style from "./PokemonPage.module.css";
+import StatsPokemon from "../../Components/StatsPokemon";
 import SpeciesStats from "./SpeciesStats";
+import Games from "Components/Games";
+import Metrics from "Components/Metrics";
+import MoveList from "Components/MoveList";
+import NavPokemon from "Components/NavPokemon";
+import style from "./PokemonPage.module.css";
 
 export function capitalizeName(name: string) {
   if (typeof name !== "string" || name.length === 0) {
@@ -69,8 +69,8 @@ function PokemonPage() {
       <div className={style.info}>
         <div className={style.name__image}>
           <h2 className={classNames(style.nome)}>
-            <span className={classNames(style.id__pokemon)}>{`#${id}`}</span>
             {nameCapitalized}
+            <span className={classNames(style.id__pokemon)}>{`#${id}`}</span>
           </h2>
           <TypesPokemon types={types} />
           <img

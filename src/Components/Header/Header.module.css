@@ -1,12 +1,20 @@
+@import "__variaveis.css";
+
 .header {
   padding: 2rem;
+  background-color: var(--w-color);
 }
 
 .link {
   text-decoration: none;
 }
 
+.link:hover {
+  text-decoration: underline;
+  color: var(--t-color);
+}
+
 .name {
   font-size: 28px;
-  color: black;
+  color: var(--t-color);
 }

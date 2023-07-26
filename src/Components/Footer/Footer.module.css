@@ -1,18 +1,21 @@
+@import "__variaveis.css";
+
 .footer {
   text-align: center;
-  background-color: white;
+  background-color: var(--w-color);
   padding: 2rem 0;
 }
 
 .link {
-  color: black;
+  color: var(--t-color);
   text-decoration: none;
 }
 
 .link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .p {
+  color: var(--t-color);
   display: inline;
 }

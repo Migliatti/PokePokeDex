@@ -1,0 +1,120 @@
+@import "__variaveis.css";
+
+.card {
+  background-color: var(--q-color);
+  padding: 14px;
+  border-radius: 8px;
+  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card__name {
+  font-size: 18px;
+  transition: 0.25s;
+}
+
+.card__img {
+  width: 140px;
+  height: 140px;
+  border-radius: 4px;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+.card__list {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.click {
+  cursor: pointer;
+}
+
+.type__normal {
+  color: #a8a878;
+}
+
+.type__fire {
+  color: #f08030;
+}
+
+.type__fighting {
+  color: #c03028;
+}
+
+.type__water {
+  color: #6890f0;
+}
+
+.type__flying {
+  color: #a890f0;
+}
+
+.type__grass {
+  color: #78c850;
+}
+
+.type__poison {
+  color: #a040a0;
+}
+
+.type__electric {
+  color: #f8d030;
+}
+
+.type__ground {
+  color: #e0c068;
+}
+
+.type__psychic {
+  color: #f85888;
+}
+
+.type__rock {
+  color: #b8a038;
+}
+
+.type__ice {
+  color: #98d8d8;
+}
+
+.type__bug {
+  color: #a8b820;
+}
+
+.type__dragon {
+  color: #7038f8;
+}
+
+.type__ghost {
+  color: #705898;
+}
+
+.type__dark {
+  color: #705848;
+}
+
+.type__steel {
+  color: #b8b8d0;
+}
+
+.type__fairy {
+  color: #ee99ac;
+}
+
+.card__name:hover {
+  color: var(--e-color);
+}
+
+.card__name:active {
+  color: var(--r-color);
+}
+
+.card__img:hover {
+  background-color: var(--e-color);
+  box-shadow: inset 20px 20px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card__img:active {
+  background-color: var(--r-color);
+}

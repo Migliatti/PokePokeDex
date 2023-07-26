@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import EvolutionCard from "./EvolutionCard";
 import api from "../../../../services/api";
-import Card from "../../../../Components/Card";
 import style from "./Evolutions.module.css";
+import React from "react";
+import { AiOutlineDoubleRight } from "react-icons/ai";
 
 interface EvolutionChain {
   species: {
@@ -49,17 +51,18 @@ function Evolutions({ chain }: any) {
   const pokemonNames = getPokemonNamesFromJson(evolutionsPoke);
 
   return (
-    <div>
-      <h3>Evolution chain</h3>
-      <ul className={style.list}>
-        {pokemonNames.map((pokemon: any, index: number) => {
+    <div className={style.evolution}>
+      <h3 className={style.evolution__title}>Evolution chain</h3>
+      <div className={style.list}>
+        {pokemonNames.map((name: string, index: number) => {
           return (
-            <li key={index}>
-              <Card name={pokemon} />
-            </li>
+            <React.Fragment key={index}>
+              <EvolutionCard name={name} />
+              <AiOutlineDoubleRight className={style.list__pointer} />
+            </React.Fragment>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 }

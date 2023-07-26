@@ -1,11 +1,12 @@
 .abilities {
-  border-bottom: 1px solid #5f5f5f;
+  border-bottom: 1px solid var(--t-color);
   padding-bottom: 4px;
 }
 
 .abilities__title {
   padding-bottom: 4px;
   font-size: 20px;
+  color: var(--t-color);
 }
 
 .list {
@@ -16,10 +17,11 @@
 }
 
 .list__item {
-  border-top: 1px solid #afafaf;
+  border-top: 1px solid var(--e-color);
   padding-top: 4px;
   display: flex;
   gap: 4px;
+  color: var(--t-color);
 }
 
 .list__item:first-child {
@@ -29,5 +31,5 @@
 
 .is_hidden {
   font-size: 14px;
-  color: #5f5f5f;
+  color: var(--r-color);
 }

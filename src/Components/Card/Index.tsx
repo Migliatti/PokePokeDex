@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import style from "./Card.module.css";
-import TypesPokemon from "../TypesPokemon";
-import { capitalizeName } from "../../pages/PokemonPage";
+import TypesPokemon from "Components/TypesPokemon";
+import { capitalizeName } from "pages/PokemonPage";
 
 interface Props {
   name: string;
@@ -22,12 +22,6 @@ function Card({ name }: Props) {
 
   const capitalized = capitalizeName(name);
 
-  const handleCardClick = () => {
-    if (pokemon) {
-      navigate(`/pokemon/${pokemon.id}`);
-    }
-  };
-
   if (!pokemon) {
     return <p>Loading...</p>;
   }
@@ -35,9 +29,9 @@ function Card({ name }: Props) {
   const { id, types } = pokemon;
 
   return (
-    <div onClick={handleCardClick} className={style.card}>
+    <div onClick={() => navigate(`/pokemon/${id}`)} className={style.card}>
       <h3 className={style.name}>
-        {capitalized} {`#${id}`}
+        {capitalized} <span className={style.id}>{`#${id}`}</span>
       </h3>
       <img
         className={style.img}

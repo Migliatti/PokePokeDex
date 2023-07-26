@@ -1,11 +1,12 @@
 .title {
   padding-bottom: 4px;
   font-size: 20px;
+  color: var(--t-color);
 }
 
 .metrics {
   padding-bottom: 4px;
-  border-bottom: 1px solid #5f5f5f;
+  border-bottom: 1px solid var(--t-color);
 }
 
 .data__list {
@@ -24,9 +25,13 @@
   display: block;
   width: 1px;
   height: 100%;
-  background-color: #afafaf;
+  background-color: var(--e-color);
 }
 
 .item__name {
-  color: #5f5f5f;
+  color: var(--r-color);
+}
+
+.item__data {
+  color: var(--t-color);
 }

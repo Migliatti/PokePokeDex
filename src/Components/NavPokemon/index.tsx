@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../../services/api";
-import style from "./NavPokemon.module.css";
-import { capitalizeName } from "..";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import classNames from "classnames";
+import style from "./NavPokemon.module.css";
+import { capitalizeName } from "pages/PokemonPage";
+import api from "services/api";
 
 function NavPokemon({ id }: any) {
   const navigate = useNavigate();

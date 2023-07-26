@@ -1,0 +1,42 @@
+.pokemon__nav {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
+  margin-bottom: 28px;
+}
+
+.pokemon__nav svg {
+  height: 20px;
+  width: 20px;
+  color: var(--r-color);
+}
+
+.name {
+  font-size: 18px;
+  color: var(--t-color);
+}
+
+.nav__button {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 0.5em;
+  transition: 0.5s;
+}
+
+.nav__next {
+  border-radius: 0 20px 20px 0;
+  padding-left: 1.3em;
+}
+
+.nav__prev {
+  border-radius: 20px 0 0 20px;
+  padding-right: 1.3em;
+}
+
+.nav__button:hover {
+  cursor: pointer;
+  background-color: var(--e-color);
+}

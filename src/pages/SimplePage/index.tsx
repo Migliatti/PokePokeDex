@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import api from "../../services/api";
-import Card from "../../Components/Card";
+import Card from "Components/Card";
 import { useNavigate, useParams } from "react-router-dom";
 import style from "./SimplePage.module.css";
+import api from "services/api";
 
 interface Pokemon {
   name: string;
@@ -26,8 +26,8 @@ function SimplePage() {
   }, [page]);
 
   useEffect(() => {
-    setLoading(true); // Define loading como true antes da chamada à API
-    let isMounted = true; // Flag para verificar se o componente está montado
+    setLoading(true);
+    let isMounted = true;
 
     const offset: number = (currentPage - 1) * 20;
     api
@@ -50,18 +50,6 @@ function SimplePage() {
       isMounted = false;
     };
   }, [currentPage]);
-
-  const handlePreviousPage = () => {
-    const nextPage = currentPage - 1;
-    navigate(`/page/${nextPage}`);
-    setCurrentPage(nextPage);
-  };
-
-  const handleNextPage = () => {
-    const nextPage = currentPage + 1;
-    navigate(`/page/${nextPage}`);
-    setCurrentPage(nextPage);
-  };
 
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
@@ -90,14 +78,14 @@ function SimplePage() {
         <button
           className={style.button__page}
           disabled={currentPage === 1}
-          onClick={handlePreviousPage}
+          onClick={() => navigate(`/page/${currentPage - 1}`)}
         >
           Previous Page
         </button>
         <button
           className={style.button__page}
           disabled={currentPage === totalPages}
-          onClick={handleNextPage}
+          onClick={() => navigate(`/page/${currentPage + 1}`)}
         >
           Next Page
         </button>
