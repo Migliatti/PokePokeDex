@@ -5,24 +5,24 @@ import api from "../../../../../services/api";
 import style from "./EvolutionCard.module.css";
 import classNames from "classnames";
 
-function EvolutionCard({ name }: any) {
+function EvolutionCard({ urlId }: any) {
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<any>();
 
   useEffect(() => {
     api
-      .get(`pokemon/${name}`)
+      .get(`pokemon/${urlId}`)
       .then((response) => setPokemon(response.data))
       .catch((err) => console.error(err));
-  }, [name]);
+  }, [urlId]);
 
   if (!pokemon) {
     return <p>Loading...</p>;
   }
 
-  const capitalized = capitalizeName(name);
+  const { name, id, types, sprites } = pokemon;
 
-  const { id, types, sprites } = pokemon;
+  const capitalized = capitalizeName(name);
 
   return (
     <div className={style.card}>

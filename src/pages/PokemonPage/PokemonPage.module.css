@@ -1,14 +1,15 @@
 .pokemon__page {
   padding: 20px;
   border-radius: 10px;
+  width: 90%;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .info {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 90%;
-  max-width: 1024px;
   margin: 0 auto;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--t-color);
@@ -42,4 +43,12 @@
   flex-direction: column;
   gap: 8px;
   width: 250px;
+}
+
+.game_data {
+  border-top: 1px solid var(--t-color);
+  padding-top: 16px;
+  margin: 8px;
+  display: flex;
+  gap: 16px;
 }

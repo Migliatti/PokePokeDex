@@ -13,23 +13,26 @@ interface EvolutionChain {
   evolves_to: EvolutionChain[];
 }
 
-function getPokemonNamesFromJson(data: any): string[] {
-  const pokemonNames: string[] = [];
+function getPokemonIdsFromJson(data: any): number[] {
+  const pokemonIds: number[] = [];
 
-  function extractNames(chain: EvolutionChain) {
-    if (chain.species && chain.species.name) {
-      pokemonNames.push(chain.species.name);
+  function extractIds(chain: EvolutionChain) {
+    if (chain.species && chain.species.url) {
+      const idMatch = chain.species.url.match(/\/(\d+)\/$/);
+      if (idMatch && idMatch[1]) {
+        pokemonIds.push(Number(idMatch[1]));
+      }
     }
     if (chain.evolves_to && chain.evolves_to.length > 0) {
-      chain.evolves_to.forEach((evolution) => extractNames(evolution));
+      chain.evolves_to.forEach((evolution) => extractIds(evolution));
     }
   }
 
   if (data && data.chain) {
-    extractNames(data.chain);
+    extractIds(data.chain);
   }
 
-  return pokemonNames;
+  return pokemonIds;
 }
 
 function Evolutions({ chain }: any) {
@@ -48,16 +51,17 @@ function Evolutions({ chain }: any) {
     return <p>Loading...</p>;
   }
 
-  const pokemonNames = getPokemonNamesFromJson(evolutionsPoke);
+  const pokemonIds = getPokemonIdsFromJson(evolutionsPoke);
 
   return (
     <div className={style.evolution}>
       <h3 className={style.evolution__title}>Evolution chain</h3>
       <div className={style.list}>
-        {pokemonNames.map((name: string, index: number) => {
+        {pokemonIds.map((id: number, index: number) => {
+          console.log(id);
           return (
             <React.Fragment key={index}>
-              <EvolutionCard name={name} />
+              <EvolutionCard urlId={id} />
               <AiOutlineDoubleRight className={style.list__pointer} />
             </React.Fragment>
           );

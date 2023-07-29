@@ -16,7 +16,12 @@ export function capitalizeName(name: string) {
   if (typeof name !== "string" || name.length === 0) {
     return name; // Retorna o valor original se não for uma string válida
   }
-  return name.charAt(0).toUpperCase() + name.slice(1);
+
+  const cleanedName = name
+    .replace(/[-0-9]+/g, " ")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  return cleanedName.charAt(0).toUpperCase() + cleanedName.slice(1);
 }
 
 function PokemonPage() {
@@ -91,8 +96,10 @@ function PokemonPage() {
         <SpeciesStats species={species.url} base_experience={base_experience} />
       )}
 
-      {moveList && <MoveList moves={moveList} />}
-      {game_indices && <Games game_indices={game_indices} />}
+      <div className={style.game_data}>
+        {moveList && <MoveList moves={moveList} />}
+        {game_indices && <Games game_indices={game_indices} />}
+      </div>
     </section>
   );
 }

@@ -1,8 +1,6 @@
 .pokemon__nav {
   display: flex;
   justify-content: space-between;
-  width: 90%;
-  max-width: 1024px;
   margin: 0 auto;
   margin-bottom: 28px;
 }

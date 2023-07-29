@@ -1,0 +1,5 @@
+.details {
+  width: 70%;
+  flex-grow: 1;
+  padding: 8px 8px 8px 0;
+}
