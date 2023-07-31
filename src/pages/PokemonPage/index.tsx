@@ -42,7 +42,7 @@ function PokemonPage() {
   }, [idPage]);
 
   if (!pokemon) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   const {

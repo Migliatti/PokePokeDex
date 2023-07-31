@@ -3,7 +3,6 @@ import MoveDetails from "./MoveDetails";
 import style from "./MoveList.module.css";
 
 function MoveList({ moves }: any) {
-  console.log();
   return (
     <div className={style.moves}>
       <h3 className={style.moves__title}>Moves</h3>
@@ -19,7 +18,6 @@ function MoveList({ moves }: any) {
             <li key={index} className={style.moves__item}>
               <h4 className={style.item__name}>{name}</h4>
               <div className={style.borda_vertical}></div>
-              {/* Adicione esta div para a borda */}
               <MoveDetails details={details} />
             </li>
           );

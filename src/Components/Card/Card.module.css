@@ -1,10 +1,15 @@
-@import "__variaveis.css";
-
 .card {
-  background-color: var(--w-color);
-  border-radius: 5px;
-  padding: 10px;
+  max-width: 230px;
+  background-color: var(--e-color);
+  border-radius: 8px;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.click__nav {
+  background-color: var(--r-color);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: 8px 8px 0 0;
+  transition: 0.15s;
 }
 
 .img {
@@ -15,21 +20,38 @@
   object-fit: cover;
 }
 
-.id {
-  color: var(--r-color);
-}
-
 .name {
   text-align: center;
-  margin-top: 10px;
-  color: var(--t-color);
+  color: var(--q-color);
+  transition: 0.15s;
+}
+
+.id {
+  color: var(--e-color);
+  font-weight: 700;
+  transition: 0.15s;
 }
 
 .list {
   display: flex;
   justify-content: space-around;
+  padding: 0.5rem;
 }
 
-.card:hover {
+.click__nav:hover {
   cursor: pointer;
+  padding: 1rem 1.5rem 0 1.5rem;
+  background-color: var(--e-color);
+}
+
+.click__nav:hover .name {
+  color: var(--t-color);
+}
+
+.click__nav:hover .id {
+  color: var(--r-color);
+}
+
+.click__nav:active {
+  background-color: var(--w-color);
 }

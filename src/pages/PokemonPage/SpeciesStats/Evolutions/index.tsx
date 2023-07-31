@@ -58,7 +58,6 @@ function Evolutions({ chain }: any) {
       <h3 className={style.evolution__title}>Evolution chain</h3>
       <div className={style.list}>
         {pokemonIds.map((id: number, index: number) => {
-          console.log(id);
           return (
             <React.Fragment key={index}>
               <EvolutionCard urlId={id} />

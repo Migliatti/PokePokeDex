@@ -1,8 +1,6 @@
-@import "__variaveis.css";
-
 .footer {
   text-align: center;
-  background-color: var(--w-color);
+  background-color: var(--e-color);
   padding: 2rem 0;
 }
 
@@ -13,6 +11,14 @@
 
 .link:hover {
   text-decoration: underline;
+}
+
+.link:active {
+  color: var(--q-color);
+}
+
+.link:active ~ .p {
+  color: var(--q-color);
 }
 
 .p {

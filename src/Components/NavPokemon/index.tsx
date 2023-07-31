@@ -27,6 +27,7 @@ function NavPokemon({ id }: any) {
       if (prev >= 1) {
         try {
           const response = await api.get("pokemon/" + prev);
+          console.log(response.data);
           setPrevPokemon(response.data);
         } catch (error) {
           console.error("ocorreu um erro ao requisitar a api", error);

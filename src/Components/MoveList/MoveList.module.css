@@ -22,17 +22,18 @@
 }
 
 .moves__list {
-  border: 1px solid var(--t-color);
+  border: 1px solid var(--e-color);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .moves__item {
   display: flex;
   align-items: center;
   gap: 8px;
-  border-top: 1px solid var(--t-color);
+  border-top: 1px solid var(--e-color);
 }
 
 .moves__item:first-child {
@@ -48,5 +49,5 @@
 .borda_vertical {
   height: 100%;
   width: 1px;
-  background-color: var(--t-color);
+  background-color: var(--e-color);
 }

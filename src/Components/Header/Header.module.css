@@ -1,8 +1,6 @@
-@import "__variaveis.css";
-
 .header {
   padding: 2rem;
-  background-color: var(--w-color);
+  background-color: var(--e-color);
 }
 
 .link {
@@ -17,4 +15,6 @@
 .name {
   font-size: 28px;
   color: var(--t-color);
+  max-width: 1024px;
+  margin: 0 auto;
 }
