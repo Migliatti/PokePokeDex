@@ -5,7 +5,10 @@ import style from "./MoveDetails.module.css";
 function MoveDetails({ details }: any) {
   const [phrase, setPhrase] = useState<any>("");
   const level = details.level_learned_at;
-  const games = details.version_group.name.replace(/[-0-9]/g, " ").split(" ");
+  const games = details.version_group.name
+    .replace(/-\d+/g, "")
+    .replace(/-/g, " ")
+    .split(" ");
 
   useEffect(() => {
     const method = details.move_learn_method.name;

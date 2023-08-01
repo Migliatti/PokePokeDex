@@ -5,29 +5,34 @@ import classNames from "classnames";
 import { capitalizeName } from "pages/PokemonPage";
 import api from "services/api";
 import style from "./NavPokemon.module.css";
+import { usePokemonContext } from "common/context/pokemons";
 
 function NavPokemon({ id }: any) {
   const navigate = useNavigate();
+  const { mainPokemons } = usePokemonContext();
+
   const [nextPokemon, setNextPokemon] = useState<any>();
   const [prevPokemon, setPrevPokemon] = useState<any>();
+
   const next = Number(id) + 1;
   const prev = Number(id) - 1;
 
   useEffect(() => {
     const fetchNextPokemon = async () => {
-      try {
-        const response = await api.get("pokemon/" + next);
-        setNextPokemon(response.data);
-      } catch (error) {
-        console.error("ocorreu um erro ao requisitar a api", error);
-      }
+      if (next <= mainPokemons.length) {
+        try {
+          const response = await api.get("pokemon/" + next);
+          setNextPokemon(response.data);
+        } catch (error) {
+          console.error("ocorreu um erro ao requisitar a api", error);
+        }
+      } else setNextPokemon(true);
     };
 
     const fetchPrevPokemon = async () => {
       if (prev >= 1) {
         try {
           const response = await api.get("pokemon/" + prev);
-          console.log(response.data);
           setPrevPokemon(response.data);
         } catch (error) {
           console.error("ocorreu um erro ao requisitar a api", error);
@@ -39,22 +44,10 @@ function NavPokemon({ id }: any) {
 
     fetchNextPokemon();
     fetchPrevPokemon();
-  }, [next, prev]);
+  }, [mainPokemons.length, next, prev]);
 
   const nextCapitalized = nextPokemon ? capitalizeName(nextPokemon.name) : "";
   const prevCapitalized = prevPokemon ? capitalizeName(prevPokemon.name) : "";
-
-  const handleNextClick = () => {
-    if (nextPokemon) {
-      navigate(`/pokemon/${nextPokemon.id}`);
-    }
-  };
-
-  const handlePrevClick = () => {
-    if (prevPokemon) {
-      navigate(`/pokemon/${prevPokemon.id}`);
-    }
-  };
 
   if (!nextPokemon || !prevPokemon) {
     return <p>Loading...</p>;
@@ -63,20 +56,24 @@ function NavPokemon({ id }: any) {
   return (
     <div className={style.pokemon__nav}>
       {prevPokemon && Number(id) !== 1 ? (
-        <div className={classNames(style.nav__button, style.nav__prev)}>
+        <div
+          onClick={() => {
+            navigate(`/pokemon/${prevPokemon.id}`);
+          }}
+          className={classNames(style.nav__button, style.nav__prev)}
+        >
           <AiOutlineLeft />
-          <p className={style.name} onClick={handlePrevClick}>
-            {prevCapitalized}
-          </p>
+          <p className={style.name}>{prevCapitalized}</p>
         </div>
       ) : (
         <div></div>
       )}
-      {nextPokemon ? (
-        <div className={classNames(style.nav__button, style.nav__next)}>
-          <p className={style.name} onClick={handleNextClick}>
-            {nextCapitalized}
-          </p>
+      {nextPokemon && Number(id) !== mainPokemons.length ? (
+        <div
+          onClick={() => navigate(`/pokemon/${nextPokemon.id}`)}
+          className={classNames(style.nav__button, style.nav__next)}
+        >
+          <p className={style.name}>{nextCapitalized}</p>
           <AiOutlineRight />
         </div>
       ) : (

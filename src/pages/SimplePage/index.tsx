@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "services/api";
 import Card from "Components/Card";
 import style from "./SimplePage.module.css";
+import { usePokemonContext } from "common/context/pokemons";
 
 interface Pokemon {
   name: string;
   url: string;
 }
 
-// Preciso arrumar: Renderização duas vezes dos pokemons(um verificação e Loading ajudaria), Valor Total de páginas
+// Preciso arrumar: Novo estilo de paginação, Valor Total de páginas
 function SimplePage() {
   const navigate = useNavigate();
+
+  const { mainPokemons } = usePokemonContext();
+  const [currentsPokemons, setCurrentsPokemons] = useState<Pokemon[]>();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -20,27 +23,10 @@ function SimplePage() {
     return storedLimit ? storedLimit : "20";
   });
 
-  const [pokeData, setPokeData] = useState<any>();
-  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [loaded, setLoaded] = useState<boolean>(false);
 
   const { page } = useParams();
-
-  // pega os pokemons que estão sendo renderizados no momento e verifica se o id deles são maiores que o número total de pokemons, no caso tem pokemons com id de número 10001, que não é pra ser renderizado.
-  const filterPokemons = (pokemons: any, length: number, count: number) => {
-    let filteredPokemons = [];
-
-    for (let i = 0; i < length; i++) {
-      const currentId = pokemons[i].url.match(/\/(\d+)\//)[1];
-      if (currentId < count) {
-        filteredPokemons.push(pokemons[i]);
-      }
-    }
-
-    setFilteredPokemons(filteredPokemons);
-  };
 
   // testa pra ver se tem algo a mais escrito na url como "/page/2" e caso n estiver nada vai para a página 1.
   useEffect(() => {
@@ -59,30 +45,25 @@ function SimplePage() {
     localStorage.setItem("limit", limit);
   }, [limit]);
 
-  // Fetch dos pokemons que é para ser renderizado, **Necessito colocar o numero limite de página perante as pokemons que passaram dna filtragem, no caso, o totalPages está reconhecendo os pokemons não filtrados como pokemons de id maior que a contagem total de pokemons existentes**.
+  // Joga os pokemons atuais na página
   useEffect(() => {
-    if (loaded) {
-      const offset: number = (currentPage - 1) * Number(limit);
-      api
-        .get(`pokemon?limit=${limit}&offset=${offset}`)
-        .then((response) => {
-          setPokeData(response.data);
-        })
-        .catch((err) => console.error(err))
-        .finally(() => {
-          setLoading(false);
-        });
+    if (mainPokemons.length > 0 && loaded) {
+      const total = Math.ceil(mainPokemons.length / Number(limit));
+      setTotalPages(total);
+      if (totalPages > 0) {
+        const offset = (currentPage - 1) * Number(limit);
+        const max = offset + Number(limit);
+        const pokemons: Pokemon[] = [];
+        for (let i = offset; i < max; i++) {
+          if (mainPokemons[i]) {
+            pokemons.push(mainPokemons[i]);
+          }
+        }
+        setCurrentsPokemons(pokemons);
+        setLoading(false);
+      }
     }
-  }, [currentPage, limit, loaded]);
-
-  // chamada para filtrar os pokemons atuais;
-  useEffect(() => {
-    if (pokeData) {
-      filterPokemons(pokeData.results, pokeData.results.length, pokeData.count);
-      const pages = Math.ceil(pokeData.count / Number(limit));
-      setTotalPages(pages);
-    }
-  }, [limit, pokeData]);
+  }, [currentPage, limit, loaded, mainPokemons, totalPages]);
 
   return (
     <div className={style.simple__page}>
@@ -102,46 +83,44 @@ function SimplePage() {
           <option value="60">60</option>
           <option value="80">80</option>
           <option value="100">100</option>
-          <option value="100000000">max</option>
+          <option value="100000000">Max</option>
         </select>
       </div>
 
       {loading ? (
         <div></div>
       ) : (
-        <ul className={style.list__pokemon}>
-          {filteredPokemons?.map((pokemon: Pokemon, index: number) => {
-            return <Card key={index} name={pokemon.name} />;
-          })}
-        </ul>
-      )}
+        <>
+          <ul className={style.list__pokemon}>
+            {currentsPokemons?.map((pokemon: Pokemon, index: number) => {
+              return <Card key={index} name={pokemon.name} />;
+            })}
+          </ul>
 
-      {loading ? (
-        <div></div>
-      ) : (
-        <div className={style.page__nav}>
-          <p className={style.current__page}>
-            Page {currentPage} of {totalPages}
-          </p>
-          <button
-            className={style.button__page}
-            disabled={currentPage === 1}
-            onClick={() => {
-              navigate(`/page/${currentPage - 1}`);
-            }}
-          >
-            Previous Page
-          </button>
-          <button
-            className={style.button__page}
-            disabled={currentPage === totalPages}
-            onClick={() => {
-              navigate(`/page/${currentPage + 1}`);
-            }}
-          >
-            Next Page
-          </button>
-        </div>
+          <div className={style.page__nav}>
+            <p className={style.current__page}>
+              Page {currentPage} of {totalPages}
+            </p>
+            <button
+              className={style.button__page}
+              disabled={currentPage === 1}
+              onClick={() => {
+                navigate(`/page/${currentPage - 1}`);
+              }}
+            >
+              Previous Page
+            </button>
+            <button
+              className={style.button__page}
+              disabled={currentPage === totalPages}
+              onClick={() => {
+                navigate(`/page/${currentPage + 1}`);
+              }}
+            >
+              Next Page
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

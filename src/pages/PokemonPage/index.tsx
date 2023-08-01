@@ -25,25 +25,18 @@ export function capitalizeName(name: string) {
 }
 
 function PokemonPage() {
+  const [loading, setLoading] = useState<boolean>(true);
   const [pokemon, setPokemon] = useState<any>({});
+
   const { idPage } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get("pokemon/" + idPage);
-        setPokemon(response.data);
-      } catch (error) {
-        console.error("ocorreu um erro ao requisitar a api", error);
-      }
-    };
-
-    fetchData();
+    api
+      .get(`pokemon/${idPage}`)
+      .then((response) => setPokemon(response.data))
+      .catch((err) => console.error(err));
+    setLoading(false);
   }, [idPage]);
-
-  if (!pokemon) {
-    return <p></p>;
-  }
 
   const {
     name,
@@ -71,35 +64,49 @@ function PokemonPage() {
     <section className={style.pokemon__page}>
       <NavPokemon id={idPage} />
 
-      <div className={style.info}>
-        <div className={style.name__image}>
-          <h2 className={classNames(style.nome)}>
-            {nameCapitalized}
-            <span className={classNames(style.id__pokemon)}>{`#${id}`}</span>
-          </h2>
-          <TypesPokemon types={types} />
-          <img
-            className={style.pokemon__image}
-            src={sprites?.front_default}
-            alt={name}
-          />
-        </div>
+      {loading ? (
+        <div></div>
+      ) : (
+        <>
+          <div className={style.info}>
+            <div className={style.name__image}>
+              <h2 className={classNames(style.nome)}>
+                {nameCapitalized}
+                <span
+                  className={classNames(style.id__pokemon)}
+                >{`#${id}`}</span>
+              </h2>
+              <TypesPokemon types={types} />
+              <img
+                className={style.pokemon__image}
+                src={sprites?.front_default}
+                alt={name}
+              />
+            </div>
 
-        <div className={style.data}>
-          {height && weight && <Metrics data={{ height, weight }} />}
-          {abilities && <Abilities abilities={abilities} />}
-          {statsList && <StatsPokemon stats={statsList} />}
-        </div>
-      </div>
+            <div className={style.data}>
+              {height && weight && <Metrics data={{ height, weight }} />}
+              {abilities && <Abilities abilities={abilities} />}
+              {statsList && <StatsPokemon stats={statsList} />}
+            </div>
+          </div>
+          {species && (
+            <SpeciesStats
+              species={species.url}
+              base_experience={base_experience}
+            />
+          )}
+          <div className={style.game_data}>
+            {moveList && <MoveList moves={moveList} />}
 
-      {species && (
-        <SpeciesStats species={species.url} base_experience={base_experience} />
+            {game_indices && game_indices.length > 0 ? (
+              <Games game_indices={game_indices} />
+            ) : (
+              <div></div>
+            )}
+          </div>
+        </>
       )}
-
-      <div className={style.game_data}>
-        {moveList && <MoveList moves={moveList} />}
-        {game_indices && <Games game_indices={game_indices} />}
-      </div>
     </section>
   );
 }

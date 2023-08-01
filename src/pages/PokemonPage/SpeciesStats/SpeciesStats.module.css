@@ -9,7 +9,6 @@
 .accurate {
   display: flex;
   justify-content: space-around;
-  padding-bottom: 32px;
 }
 
 .accurate__div {

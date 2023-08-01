@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import EvolutionCard from "./EvolutionCard";
 import api from "../../../../services/api";
-import style from "./Evolutions.module.css";
 import React from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
+import style from "./Evolutions.module.css";
 
 interface EvolutionChain {
   species: {
@@ -52,6 +52,10 @@ function Evolutions({ chain }: any) {
   }
 
   const pokemonIds = getPokemonIdsFromJson(evolutionsPoke);
+
+  if (pokemonIds.length <= 1) {
+    return <div></div>;
+  }
 
   return (
     <div className={style.evolution}>

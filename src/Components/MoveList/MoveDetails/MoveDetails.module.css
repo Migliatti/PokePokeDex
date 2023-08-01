@@ -1,5 +1,30 @@
 .details {
   width: 70%;
   flex-grow: 1;
-  padding: 8px 8px 8px 0;
+  padding: 16px 8px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.details__phrase {
+  color: var(--t-color);
+  background-color: var(--e-color);
+  border-radius: 5px;
+  padding: 4px;
+  box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.games__phrase {
+  color: var(--t-color);
+}
+
+.games__list {
+  padding-top: 4px;
+  display: flex;
+  gap: 16px;
+}
+
+.games__item {
+  color: var(--r-color);
 }
