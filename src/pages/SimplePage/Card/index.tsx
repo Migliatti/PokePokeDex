@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { capitalizeName } from "pages/PokemonPage";
-import api from "../../services/api";
+import api from "../../../services/api";
 import TypesPokemon from "Components/TypesPokemon";
 import style from "./Card.module.css";
 
