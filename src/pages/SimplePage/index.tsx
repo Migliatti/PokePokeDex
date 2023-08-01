@@ -67,7 +67,7 @@ function SimplePage() {
 
   return (
     <div className={style.simple__page}>
-      <h2 className={style.title}>List of pokemon</h2>
+      <h2 className={style.title}>Pokemon list</h2>
 
       <div className={style.limit}>
         <p className={style.limit__text}>Total Pokemon per page:</p>
