@@ -1,40 +1,65 @@
 .pokemon__nav {
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  margin-bottom: 28px;
+  margin: 0 auto 1em;
 }
 
 .pokemon__nav svg {
-  height: 20px;
-  width: 20px;
-  color: var(--r-color);
+  height: 1.25em;
+  width: 1.25em;
+  color: var(--font-color-secondary);
 }
 
 .name {
-  font-size: 18px;
-  color: var(--t-color);
+  font-size: 1.25em;
+  color: var(--font-color-primary);
 }
 
 .nav__button {
   display: flex;
-  gap: 16px;
+  gap: 0.5em;
   align-items: center;
   padding: 0.5em;
-  transition: 0.5s;
+  border-radius: 16px;
+  transition: 0.25s;
 }
 
 .nav__next {
-  border-radius: 0 20px 20px 0;
-  padding-left: 1.3em;
+  margin-right: 1em;
+  padding-left: 1rem;
 }
 
 .nav__prev {
-  border-radius: 20px 0 0 20px;
-  padding-right: 1.3em;
+  margin-left: 1em;
+  padding-right: 1rem;
 }
 
 .nav__button:hover {
   cursor: pointer;
-  background-color: var(--e-color);
+  background-color: var(--primary-color-hover);
+  gap: 1em;
+}
+
+.nav__next:hover {
+  margin-right: 0.5em;
+}
+
+.nav__prev:hover {
+  margin-left: 0.5em;
+}
+
+.nav__button:active {
+  background-color: var(--secondary-color);
+}
+
+@media screen and (max-width: 425px) {
+  .nav__next,
+  .nav__prev {
+    margin: 0;
+    padding: 0.5rem 0.7rem;
+  }
+
+  .name {
+    display: none;
+  }
 }

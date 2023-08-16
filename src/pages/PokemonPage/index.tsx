@@ -76,7 +76,9 @@ function PokemonPage() {
                   className={classNames(style.id__pokemon)}
                 >{`#${id}`}</span>
               </h2>
-              <TypesPokemon types={types} />
+              <div className={style.list__type}>
+                <TypesPokemon types={types} />
+              </div>
               <img
                 className={style.pokemon__image}
                 src={sprites?.front_default}

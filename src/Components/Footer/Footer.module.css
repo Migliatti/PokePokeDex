@@ -1,27 +1,22 @@
 .footer {
+  border-top: 2px solid var(--primary-color);
   text-align: center;
-  background-color: var(--e-color);
-  padding: 2rem 0;
+  padding: 1.5rem 0;
 }
 
-.link {
-  color: var(--t-color);
+.link__container {
+  margin: 0 auto;
   text-decoration: none;
+  padding: 0.5rem 0.7rem;
+  border-radius: 1rem;
 }
 
-.link:hover {
-  text-decoration: underline;
-}
-
-.link:active {
-  color: var(--q-color);
-}
-
-.link:active ~ .p {
-  color: var(--q-color);
+.link__container:hover {
+  background-color: var(--primary-color-hover);
 }
 
 .p {
-  color: var(--t-color);
+  font-size: 0.85rem;
+  color: var(--font-color-primary);
   display: inline;
 }

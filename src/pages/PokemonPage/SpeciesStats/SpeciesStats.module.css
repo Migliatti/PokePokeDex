@@ -1,6 +1,6 @@
 .species {
   margin: 0 auto;
-  padding: 16px 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,25 +12,25 @@
 }
 
 .accurate__div {
-  width: 250px;
+  width: 288px;
 }
 
 .accurate__title {
-  font-size: 20px;
-  padding-bottom: 4px;
-  color: var(--t-color);
+  font-size: 1.25rem;
+  padding-bottom: 0.5rem;
+  color: var(--font-color-secondary);
 }
 
 .accurate__list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin: 0 8px;
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
 }
 
 .accurate__item {
-  border-top: 1px solid var(--e-color);
-  padding-top: 4px;
+  border-top: 2px solid var(--primary-color);
+  padding: 0.5rem 0.7rem;
   display: flex;
   justify-content: space-between;
 }
@@ -40,25 +40,42 @@
 }
 
 .item__name {
-  color: var(--r-color);
+  color: var(--font-color-primary);
 }
 
 .item__data {
-  color: var(--t-color);
+  color: var(--font-color-secondary);
+  font-family: var(--font-primary);
 }
 
 .egg__list {
   display: flex;
-  gap: 4px;
-  color: var(--t-color);
+  gap: 0.5rem;
 }
 
 .egg__item {
-  border-right: 1px solid var(--e-color);
-  padding-right: 4px;
+  color: var(--font-color-secondary);
+  font-family: var(--font-primary);
 }
 
 .egg__item:last-child {
   border: none;
   padding: 0;
+}
+
+.barra {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.barra:last-child {
+  display: none;
+}
+
+@media screen and (max-width: 425px) {
+  .accurate {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
 }

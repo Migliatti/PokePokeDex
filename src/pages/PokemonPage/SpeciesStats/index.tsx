@@ -4,6 +4,7 @@ import { capitalizeName } from "..";
 import Evolutions from "./Evolutions";
 import style from "./SpeciesStats.module.css";
 import classNames from "classnames";
+import React from "react";
 
 function SpeciesStats({ species, base_experience }: any) {
   const parts = species.split("v2/");
@@ -64,9 +65,12 @@ function SpeciesStats({ species, base_experience }: any) {
               <ul className={style.egg__list}>
                 {egg_groups.map((group: any, index: number) => {
                   return (
-                    <li key={index} className={style.egg__item}>
-                      {capitalizeName(group.name)}
-                    </li>
+                    <React.Fragment key={index}>
+                      <li className={style.egg__item}>
+                        {capitalizeName(group.name)}
+                      </li>
+                      <li className={style.barra}>/</li>
+                    </React.Fragment>
                   );
                 })}
               </ul>

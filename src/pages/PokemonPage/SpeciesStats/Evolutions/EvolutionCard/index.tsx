@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { capitalizeName } from "../../..";
 import api from "../../../../../services/api";
 import style from "./EvolutionCard.module.css";
+import { AiOutlineArrowRight } from "react-icons/ai";
 import classNames from "classnames";
 
 function EvolutionCard({ urlId }: any) {
@@ -26,12 +27,18 @@ function EvolutionCard({ urlId }: any) {
 
   return (
     <div className={style.card}>
-      <div onClick={() => navigate(`/pokemon/${id}`)} className={style.click}>
-        <h3 className={style.card__name}>{capitalized}</h3>
+      <div
+        className={style.card__container}
+        onClick={() => navigate(`/pokemon/${id}`)}
+      >
+        <div className={style.container__name}>
+          <h3 className={style.name}>{capitalized}</h3>
+          <AiOutlineArrowRight className={style.name__icon} />
+        </div>
         <img
+          className={style.container__image}
           src={sprites.front_default}
           alt={name}
-          className={style.card__img}
         />
       </div>
       <ul className={style.card__list}>

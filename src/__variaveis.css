@@ -1,7 +1,19 @@
 :root {
-  --q-color: #ffffff;
-  --w-color: #fffbfe;
-  --e-color: #d0cfcf;
-  --r-color: #7a7d7d;
-  --t-color: #565254;
+  /* cores */
+  --bg-color: #f8f6f4;
+  --bg-color-secondary: #ecf1ef;
+  --primary-color: #c4dfdf;
+  --primary-color-hover: #d2e9e9;
+  --secondary-color: #96b6c5;
+  --secondary-color-hover: #adc4ce;
+  --tertiary-color: #27374d;
+  --tertiary-color-hover: #526d82;
+  /* cores de fonte */
+  --font-color-primary: #272829;
+  --font-color-secondary: #61677a;
+  --font-color-tertiary: #f6f1e9;
+  /* fontes */
+  --font-primary: "Roboto mono", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+  --font-tertiary: "Source code pro", sans-serif;
 }

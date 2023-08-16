@@ -1,7 +1,9 @@
 @import "__variaveis.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&family=Roboto+Mono:wght@300;400;500;700&family=Source+Code+Pro:wght@500&display=swap");
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-secondary);
+  background-color: var(--bg-color);
 }
 
 * {

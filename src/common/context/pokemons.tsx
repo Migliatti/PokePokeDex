@@ -1,3 +1,5 @@
+import { searchSystem } from "common/functions/filters";
+import { Pokemon } from "common/interface/Pokemon";
 import {
   ReactNode,
   createContext,
@@ -6,11 +8,6 @@ import {
   useState,
 } from "react";
 import api from "services/api";
-
-interface Pokemon {
-  url: string;
-  name: string;
-}
 
 type UserContextProps = {
   children: ReactNode;
@@ -21,13 +18,21 @@ type UserContextType = {
   setMainPokemons: (data: any) => void;
   secondsPokemons: Pokemon[];
   setSecondsPokemons: (data: any) => void;
+  currentsPokemons: Pokemon[];
+  setCurrentsPokemons: (data: any) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 };
 
 const initialValue = {
   mainPokemons: [],
   secondsPokemons: [],
+  searchValue: "",
+  currentsPokemons: [],
   setMainPokemons: () => {},
   setSecondsPokemons: () => [],
+  setSearchValue: () => {},
+  setCurrentsPokemons: () => {},
 };
 
 export const PokemonContext = createContext<UserContextType>(initialValue);
@@ -39,6 +44,12 @@ export const PokemonProvider = ({ children }: UserContextProps) => {
   );
   const [secondsPokemons, setSecondsPokemons] = useState<Pokemon[]>(
     initialValue.secondsPokemons
+  );
+  const [searchValue, setSearchValue] = useState<string>(
+    initialValue.searchValue
+  );
+  const [currentsPokemons, setCurrentsPokemons] = useState<Pokemon[]>(
+    initialValue.currentsPokemons
   );
 
   // Separa os pokemons que vai até o numero correto com os pokemons que ultrapassam o Id
@@ -69,6 +80,12 @@ export const PokemonProvider = ({ children }: UserContextProps) => {
       .catch((err) => console.error(err));
   }, []);
 
+  useEffect(() => {
+    searchValue
+      ? setCurrentsPokemons(searchSystem(mainPokemons, searchValue))
+      : setCurrentsPokemons(mainPokemons);
+  }, [mainPokemons, searchValue]);
+
   return (
     <PokemonContext.Provider
       value={{
@@ -76,6 +93,10 @@ export const PokemonProvider = ({ children }: UserContextProps) => {
         setMainPokemons,
         secondsPokemons,
         setSecondsPokemons,
+        searchValue,
+        setSearchValue,
+        currentsPokemons,
+        setCurrentsPokemons,
       }}
     >
       {children}
@@ -84,10 +105,19 @@ export const PokemonProvider = ({ children }: UserContextProps) => {
 };
 
 export const usePokemonContext = () => {
-  const { mainPokemons, secondsPokemons } = useContext(PokemonContext);
+  const {
+    mainPokemons,
+    secondsPokemons,
+    searchValue,
+    setSearchValue,
+    currentsPokemons,
+  } = useContext(PokemonContext);
 
   return {
     mainPokemons,
     secondsPokemons,
+    searchValue,
+    setSearchValue,
+    currentsPokemons,
   };
 };

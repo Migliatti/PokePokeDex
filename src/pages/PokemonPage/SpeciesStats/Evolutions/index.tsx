@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import EvolutionCard from "./EvolutionCard";
 import api from "../../../../services/api";
 import React from "react";
-import { AiOutlineDoubleRight } from "react-icons/ai";
+import { BsArrowRight } from "react-icons/bs";
+import { SlGraph } from "react-icons/sl";
 import style from "./Evolutions.module.css";
 
 interface EvolutionChain {
@@ -59,13 +60,16 @@ function Evolutions({ chain }: any) {
 
   return (
     <div className={style.evolution}>
-      <h3 className={style.evolution__title}>Evolution chain</h3>
+      <div className={style.evolution__container}>
+        <SlGraph className={style.evolution__icon} />
+        <h3 className={style.evolution__title}>Evolution chain</h3>
+      </div>
       <div className={style.list}>
         {pokemonIds.map((id: number, index: number) => {
           return (
             <React.Fragment key={index}>
               <EvolutionCard urlId={id} />
-              <AiOutlineDoubleRight className={style.list__pointer} />
+              <BsArrowRight className={style.list__pointer} />
             </React.Fragment>
           );
         })}

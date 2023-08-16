@@ -1,35 +1,32 @@
-.abilities {
-  border-bottom: 1px solid var(--t-color);
-  padding-bottom: 4px;
-}
-
 .abilities__title {
-  padding-bottom: 4px;
-  font-size: 20px;
-  color: var(--t-color);
+  padding-bottom: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--font-color-secondary);
 }
 
 .list {
-  margin: 0 8px;
   display: flex;
-  gap: 4px;
   flex-direction: column;
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
 }
 
 .list__item {
-  border-top: 1px solid var(--e-color);
-  padding-top: 4px;
+  border-top: 2px solid var(--primary-color);
+  padding: 0.5rem 0.7rem;
+
   display: flex;
-  gap: 4px;
-  color: var(--t-color);
+  align-items: center;
+  gap: 0.25em;
+  color: var(--font-color-primary);
 }
 
 .list__item:first-child {
   border: none;
-  padding-top: 0;
 }
 
 .is_hidden {
-  font-size: 14px;
-  color: var(--r-color);
+  font-size: 0.75rem;
+  color: var(--font-color-secondary);
+  font-family: var(--font-primary);
 }

@@ -24,6 +24,7 @@ function Metrics({ data }: any) {
           <h4 className={style.item__name}>Height:</h4>
           <p className={style.item__data}>{adicionarPonto(height)}m</p>
         </li>
+        <li className={style.barra}>/</li>
         <li className={style.list__item}>
           <h4 className={style.item__name}>Weight:</h4>
           <p className={style.item__data}>{adicionarPonto(weight)}kg</p>

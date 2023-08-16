@@ -1,47 +1,63 @@
 .games {
-  width: 40%;
+  width: 20rem;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
+  transition: 0.25s;
 }
 
 .games__title {
-  font-size: 20px;
-  color: var(--t-color);
+  font-size: 1.25rem;
+  color: var(--font-color-secondary);
+  padding-left: 1.5rem;
 }
 
 .games__list {
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  width: 90%;
-  margin: 0 auto;
+  transition: 0.25s;
 }
 
 .games__item {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  border-top: 1px solid var(--r-color);
-  padding-top: 2px;
+  border-top: 2px solid var(--primary-color);
+  padding: 0.5rem 0.7rem;
 }
 
 .games__item:first-child {
-  padding: 0;
   border: none;
 }
 
 .item__name {
-  font-size: 18px;
-  color: var(--r-color);
+  color: var(--font-color-primary);
 }
 
 .item__index {
-  color: var(--t-color);
+  color: var(--font-color-secondary);
 }
 
 .index__advert {
-  font-size: 14px;
-  color: var(--r-color);
+  font-size: 0.75rem;
+  color: var(--font-color-primary);
+}
+
+.seta__container {
+  text-align: center;
+}
+
+.seta {
+  color: var(--secondary-color);
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: 0.25s;
+}
+
+.seta:hover {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
 }

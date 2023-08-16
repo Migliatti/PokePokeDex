@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { usePokemonContext } from "common/context/pokemons";
 import Card from "pages/SimplePage/Card";
 import style from "./SimplePage.module.css";
-import { usePokemonContext } from "common/context/pokemons";
+import PageNav from "./PageNav";
 
 interface Pokemon {
   name: string;
@@ -13,8 +14,8 @@ interface Pokemon {
 function SimplePage() {
   const navigate = useNavigate();
 
-  const { mainPokemons } = usePokemonContext();
-  const [currentsPokemons, setCurrentsPokemons] = useState<Pokemon[]>();
+  const { currentsPokemons } = usePokemonContext();
+  const [actualPokemons, setActualPokemons] = useState<Pokemon[]>();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
@@ -31,14 +32,20 @@ function SimplePage() {
   // testa pra ver se tem algo a mais escrito na url como "/page/2" e caso n estiver nada vai para a página 1.
   useEffect(() => {
     setLoading(true);
+
     if (page && /^\d+$/.test(page)) {
+      const parsedPage = Number(page);
+      const totalPages = Math.ceil(currentsPokemons?.length / Number(limit));
+      if (parsedPage > totalPages && totalPages) {
+        navigate("/not-found");
+      }
       setCurrentPage(Number(page));
     } else {
       setCurrentPage(1);
     }
     // Verificar se ja leu o numero da página
     setLoaded(true);
-  }, [page]);
+  }, [limit, currentsPokemons?.length, navigate, page]);
 
   // Guarda o valor de limit no navegador do cliente.
   useEffect(() => {
@@ -47,79 +54,69 @@ function SimplePage() {
 
   // Joga os pokemons atuais na página
   useEffect(() => {
-    if (mainPokemons.length > 0 && loaded) {
-      const total = Math.ceil(mainPokemons.length / Number(limit));
+    if (currentsPokemons?.length > 0 && loaded) {
+      const total = Math.ceil(currentsPokemons?.length / Number(limit));
       setTotalPages(total);
       if (totalPages > 0) {
         const offset = (currentPage - 1) * Number(limit);
         const max = offset + Number(limit);
         const pokemons: Pokemon[] = [];
         for (let i = offset; i < max; i++) {
-          if (mainPokemons[i]) {
-            pokemons.push(mainPokemons[i]);
+          if (currentsPokemons[i]) {
+            pokemons.push(currentsPokemons[i]);
           }
         }
-        setCurrentsPokemons(pokemons);
+        setActualPokemons(pokemons);
         setLoading(false);
       }
     }
-  }, [currentPage, limit, loaded, mainPokemons, totalPages]);
+  }, [currentPage, limit, loaded, currentsPokemons, totalPages]);
 
   return (
-    <div className={style.simple__page}>
-      <h2 className={style.title}>Pokemon list</h2>
+    <div className={style.simple_page}>
+      <div className={style.simple_page__header}>
+        <h2 className={style.title}>Pokemon list</h2>
 
-      <div className={style.limit}>
-        <p className={style.limit__text}>Total Pokemon per page:</p>
-        <select
-          value={limit}
-          onChange={(event) => {
-            setLimit(event.target.value);
-          }}
-          className={style.limit__input}
-        >
-          <option value="20">20</option>
-          <option value="40">40</option>
-          <option value="60">60</option>
-          <option value="80">80</option>
-          <option value="100">100</option>
-          <option value="100000000">Max</option>
-        </select>
+        <div className={style.limit}>
+          <p className={style.limit__text}>Total Pokemon per page:</p>
+          <select
+            value={limit}
+            onChange={(event) => {
+              setLimit(event.target.value);
+            }}
+            className={style.limit__input}
+          >
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="60">60</option>
+            <option value="80">80</option>
+            <option value="100">100</option>
+            <option value="100000000">Max</option>
+          </select>
+        </div>
       </div>
 
       {loading ? (
-        <div></div>
+        <div className={style.loading}>Loading...</div>
       ) : (
         <>
-          <ul className={style.list__pokemon}>
-            {currentsPokemons?.map((pokemon: Pokemon, index: number) => {
-              return <Card key={index} name={pokemon.name} />;
-            })}
-          </ul>
+          {actualPokemons?.length ? (
+            <ul className={style.list__pokemon}>
+              {actualPokemons?.map((pokemon: Pokemon, index: number) => {
+                return <Card key={index} name={pokemon.name} />;
+              })}
+            </ul>
+          ) : (
+            <div className={style.container__pokemon_not_found}>
+              <p className={style.pokemon_not_found}>pokemon not found</p>
+            </div>
+          )}
 
-          <div className={style.page__nav}>
-            <p className={style.current__page}>
-              Page {currentPage} of {totalPages}
-            </p>
-            <button
-              className={style.button__page}
-              disabled={currentPage === 1}
-              onClick={() => {
-                navigate(`/page/${currentPage - 1}`);
-              }}
-            >
-              Previous Page
-            </button>
-            <button
-              className={style.button__page}
-              disabled={currentPage === totalPages}
-              onClick={() => {
-                navigate(`/page/${currentPage + 1}`);
-              }}
-            >
-              Next Page
-            </button>
-          </div>
+          {totalPages > 1 ? (
+            <PageNav currentPage={currentPage} totalPages={totalPages} />
+          ) : (
+            <div></div>
+          )}
         </>
       )}
     </div>

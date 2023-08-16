@@ -1,0 +1,76 @@
+.page__nav {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85em;
+}
+
+.arrow_page {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 1rem;
+  color: var(--font-color-primary);
+  padding: 0.3rem;
+  box-sizing: content-box;
+  transition: 0.25s;
+}
+
+.arrow_page:hover {
+  cursor: pointer;
+  background-color: var(--primary-color);
+}
+
+.page_button,
+.current_page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  text-align: center;
+  border-radius: 1rem;
+  padding: 0.3em;
+  box-sizing: content-box;
+  color: var(--font-color-primary);
+  transition: 0.25s;
+}
+
+.page_button {
+  font-weight: 500;
+}
+
+.page_button:hover {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.current_page {
+  text-decoration: underline;
+  background-color: var(--secondary-color-hover);
+  color: var(--font-color-secondary);
+}
+
+.current_page {
+  cursor: default;
+}
+
+@media screen and (max-width: 425px) {
+  .page__nav {
+    overflow-x: scroll; /* Adiciona uma barra de rolagem horizontal caso haja muitos botões */
+    gap: 0; /* Remove o espaçamento entre os botões para aproveitar melhor o espaço */
+  }
+
+  .page_button {
+    display: none; /* Esconde os botões de página em telas menores */
+  }
+
+  .current_page {
+    display: flex; /* Mantém visível a página atual */
+    justify-content: center;
+    align-items: center;
+    min-width: 1.25rem; /* Mínimo necessário para a página atual ser visível */
+    padding: 0.3em;
+  }
+}

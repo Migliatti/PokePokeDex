@@ -1,5 +1,5 @@
 import { capitalizeName } from "pages/PokemonPage";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import style from "./MoveDetails.module.css";
 
 function MoveDetails({ details }: any) {
@@ -67,9 +67,9 @@ function MoveDetails({ details }: any) {
           {games.map((game: string, index: number) => {
             const name = capitalizeName(game);
             return (
-              <li key={index} className={style.games__item}>
-                {name}
-              </li>
+              <Fragment key={index}>
+                <li className={style.games__item}>{name}</li>
+              </Fragment>
             );
           })}
         </ul>

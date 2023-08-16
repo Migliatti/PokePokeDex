@@ -1,33 +1,75 @@
-@import "__variaveis.css";
-
 .card {
-  background-color: var(--q-color);
-  padding: 14px;
-  border-radius: 8px;
-  box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.1);
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.card__name {
-  font-size: 18px;
+.container__name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   transition: 0.25s;
 }
 
-.card__img {
-  width: 140px;
-  height: 140px;
-  border-radius: 4px;
-  margin: 4px 0;
-  transition: 0.3s;
+.name {
+  font-family: var(--font-primary);
+  color: var(--font-color-primary);
+  font-size: 1.15rem;
+  transition: 0.25s;
+}
+
+.name__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: transparent;
+  transition: 0.25s;
+}
+
+.card__container {
+  border-top: 1px solid transparent;
+  border-radius: 1rem 1rem 0 0;
+  padding: 1rem 1rem 0;
+  transition: 0.25s;
+}
+
+.container__image {
+  width: 10rem;
+  height: 10rem;
+  transition: 0.25s;
+}
+
+.card__container:hover {
+  cursor: pointer;
+}
+
+.card__container:hover > .container__name,
+.container__name:hover {
+  cursor: pointer;
+  padding-left: 0.5rem;
+}
+
+.card__container:hover > .container__name .name__icon,
+.container__name:hover .name__icon {
+  color: var(--font-color-primary);
 }
 
 .card__list {
-  margin-top: 4px;
   display: flex;
   justify-content: space-around;
+  padding: 1rem;
 }
 
-.click {
+.type {
+  padding: 0.5em 0.7em;
+  border-radius: 1rem;
+  transition: 0.25s;
+}
+
+.type:hover {
   cursor: pointer;
+  background-color: var(--primary-color-hover);
 }
 
 .type__normal {
@@ -102,19 +144,74 @@
   color: #ee99ac;
 }
 
-.card__name:hover {
-  color: var(--e-color);
+.type__normal:hover {
+  background-color: #a8a87855;
 }
 
-.card__name:active {
-  color: var(--r-color);
+.type__fire:hover {
+  background-color: #f0803055;
 }
 
-.card__img:hover {
-  background-color: var(--e-color);
-  box-shadow: inset 20px 20px 30px rgba(0, 0, 0, 0.1);
+.type__fighting:hover {
+  background-color: #c0302855;
 }
 
-.card__img:active {
-  background-color: var(--r-color);
+.type__water:hover {
+  background-color: #6890f055;
+}
+
+.type__flying:hover {
+  background-color: #a890f055;
+}
+
+.type__grass:hover {
+  background-color: #78c85055;
+}
+
+.type__poison:hover {
+  background-color: #a040a055;
+}
+
+.type__electric:hover {
+  background-color: #f8d03055;
+}
+
+.type__ground:hover {
+  background-color: #e0c06855;
+}
+
+.type__psychic:hover {
+  background-color: #f8588855;
+}
+
+.type__rock:hover {
+  background-color: #b8a03855;
+}
+
+.type__ice:hover {
+  background-color: #98d8d855;
+}
+
+.type__bug:hover {
+  background-color: #a8b82055;
+}
+
+.type__dragon:hover {
+  background-color: #7038f855;
+}
+
+.type__ghost:hover {
+  background-color: #70589855;
+}
+
+.type__dark:hover {
+  background-color: #70584855;
+}
+
+.type__steel:hover {
+  background-color: #b8b8d055;
+}
+
+.type__fairy:hover {
+  background-color: #ee99ac55;
 }

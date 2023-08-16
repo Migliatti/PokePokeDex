@@ -3,10 +3,12 @@ import style from "./Footer.module.css";
 function Footer() {
   return (
     <footer className={style.footer}>
-      <a href="https://portifolio-parizi2-0.vercel.app/" className={style.link}>
-        Developed by Gabriel Migliatti
+      <a
+        className={style.link__container}
+        href="https://portifolio-parizi2-0.vercel.app/"
+      >
+        <p className={style.p}>Developed by Gabriel Migliatti - 2023</p>
       </a>
-      <p className={style.p}> - 2023</p>
     </footer>
   );
 }

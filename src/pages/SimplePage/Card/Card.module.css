@@ -1,41 +1,68 @@
 .card {
   max-width: 230px;
-  background-color: var(--e-color);
-  border-radius: 8px;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
-}
-
-.click__nav {
-  background-color: var(--r-color);
-  padding: 1rem 1rem 0 1rem;
-  border-radius: 8px 8px 0 0;
-  transition: 0.15s;
+  background-color: var(--bg-color);
+  border-radius: 16px;
+  border: 2px solid var(--primary-color);
 }
 
 .img {
   display: block;
-  margin: 0 auto;
-  width: 150px;
-  height: 150px;
+  margin: auto;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
+}
+
+.info {
+  padding-top: 0.8em;
+  border-top: 2px solid var(--primary-color);
+}
+
+.info__click {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding-left: 1em;
+  transition: 0.25s;
 }
 
 .name {
   text-align: center;
-  color: var(--q-color);
-  transition: 0.15s;
+  color: var(--font-color-primary);
+  font-family: var(--font-primary);
 }
 
 .id {
-  color: var(--e-color);
-  font-weight: 700;
-  transition: 0.15s;
+  color: var(--font-color-secondary);
+  font-weight: 500;
+  font-family: var(--font-primary);
+}
+
+.seta {
+  color: var(--bg-color);
+  transition: 0.25s;
+}
+
+.img:hover {
+  cursor: pointer;
+}
+
+.img:hover ~ .info .info__click,
+.info__click:hover {
+  padding-left: 1.5rem;
+  cursor: pointer;
+}
+
+.img:hover ~ .info .info__click .seta,
+.info__click:hover .seta {
+  color: var(--font-color-secondary);
+  cursor: pointer;
 }
 
 .list {
   display: flex;
   justify-content: space-around;
-  padding: 0.5rem;
+  padding: 1em 0;
 }
 
 .click__nav:hover {
